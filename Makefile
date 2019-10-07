@@ -35,8 +35,10 @@ anim: kd-forest.mkv
 
 kd-forest.mkv: kd-forest
 	$(RM) kd-forest.mkv
+	$(RM) kd-forest-mkv.png
 	mkdir /tmp/kd-frames
 	./kd-forest $(ANIMFLAGS) -a -o /tmp/kd-frames
+	cp /tmp/kd-frames/last.png kd-forest-mkv.png
 	ffmpeg -r 60 -i /tmp/kd-frames/%04d.png -c:v libx264 -preset veryslow -qp 0 kd-forest.mkv
 	$(RM) -r /tmp/kd-frames
 
